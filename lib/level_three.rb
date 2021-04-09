@@ -43,7 +43,6 @@ class LevelThree
 
   end
 
-
   def add_assets
     @platforms.each do |platform|
       platform.add

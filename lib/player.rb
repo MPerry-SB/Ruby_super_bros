@@ -18,8 +18,8 @@ class Player
     @coins = 0
     @lives = 3
     @touching_platform = false
-    @death_sound = Sound.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\Super_Ruby_Bros\assets\death.wav')
-    @hero = Sprite.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\Super_Ruby_Bros\assets\hero.png', z: 5, clip_width: 33, height: 57, width: 33)
+    @death_sound = Sound.new('./assets/death.wav')
+    @hero = Sprite.new('./assets/hero.png', z: 5, clip_width: 33, height: 57, width: 33)
 
   end
 

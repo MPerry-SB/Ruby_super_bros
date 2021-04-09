@@ -174,7 +174,7 @@ update do
   platform_collision
   coin_collision
   enemy_collison
-  background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\Super_Ruby_Bros\assets\bg.png', z: 3)
+  background = Image.new('./assets/bg.png', z: 3)
   @player.hero.x = @player.x
   @player.hero.y = @player.y
   @player.hero.add
@@ -207,8 +207,8 @@ update do
       @sounds.game_over
       @game_over_sound = true
     end
-    background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\Super_Ruby_Bros\assets\bg.png', z: 8)
-    background = Image.new('C:\Users\Desktop-01\Documents\VS_CODE_Projects\Super_Ruby_Bros\assets\gameover.png', z: 9, x: 150, y: 200) 
+    background = Image.new('./assets/bg.png', z: 8)
+    background = Image.new('./assets/gameover.png', z: 9, x: 150, y: 200) 
     endgame_text = Text.new('Coins Collected', z: 9, color: 'red', size: 25, x: 360, y: 500 ) 
     total_coins = Text.new(@player.coins, z: 9, color: 'red', size: 40, x: 438, y: 540) 
     endgame_text = Text.new('Hit Enter to try again...', z: 9, color: 'red', size: 20, x:350, y: 600 )

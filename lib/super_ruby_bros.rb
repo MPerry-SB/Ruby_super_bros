@@ -6,8 +6,7 @@ require_relative 'level_two'
 require_relative 'level_three'
 require_relative 'win_screen'
 
-
-set title: "Super Ruby Bros", background: 'red', width: 900, height: 700
+set title: 'Super Ruby Bros', background: 'red', width: 900, height: 700
 
 GRAVITY = 7
 
@@ -37,51 +36,51 @@ on :key_held do |event|
     @stage_one = true
     @stage_two = false
     @stage_three = false
-    coin_reset(@level_one)    
-    coin_reset(@level_two)    
-    coin_reset(@level_three)    
+    coin_reset(@level_one)
+    coin_reset(@level_two)
+    coin_reset(@level_three)
     @game_over_sound = false
   end
 end
 
-
-
 def coin_reset(level)
   level.coins.each do |coin|
-    if coin.y > 1000 
-      coin.y -= 1000
-    end
+    coin.y -= 1000 if coin.y > 1000
   end
 end
 
 on :key_up do |event|
-  if event.key == 'space'
-    @player.jumper_state = nil
-  end
+  @player.jumper_state = nil if event.key == 'space'
 end
 
 def platform_collision
   if @stage_one == true
     @level_one.platforms.each do |platform|
-      if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
+      if platform.contains?(@player.square.x3,
+                            @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
         @player.landed_on_platform
-      elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
+      elsif platform.contains?(@player.square.x1,
+                               @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
     end
   elsif @stage_two == true
     @level_two.platforms.each do |platform|
-      if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
+      if platform.contains?(@player.square.x3,
+                            @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
         @player.landed_on_platform
-      elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
+      elsif platform.contains?(@player.square.x1,
+                               @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
     end
   elsif @stage_three == true
     @level_three.platforms.each do |platform|
-      if platform.contains?(@player.square.x3, @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
+      if platform.contains?(@player.square.x3,
+                            @player.square.y3) || platform.contains?(@player.square.x4, @player.square.y4)
         @player.landed_on_platform
-      elsif platform.contains?(@player.square.x1, @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
+      elsif platform.contains?(@player.square.x1,
+                               @player.square.y1) || platform.contains?(@player.square.x2, @player.square.y2)
         @player.jumper_state = nil
       end
     end
@@ -91,27 +90,42 @@ end
 def coin_collision
   if @stage_one == true
     @level_one.coins.each do |coin|
-      if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
-        @player.coins += 1
-        @sounds.coin
-        coin.y += 1000
-      end
+      next unless coin.contains?(@player.square.x1,
+                                 @player.square.y1) || coin.contains?(@player.square.x2,
+                                                                      @player.square.y2) || coin.contains?(@player.square.x3,
+                                                                                                           @player.square.y3) || coin.contains?(
+                                                                                                             @player.square.x4, @player.square.y4
+                                                                                                           )
+
+      @player.coins += 1
+      @sounds.coin
+      coin.y += 1000
     end
   elsif @stage_two == true
     @level_two.coins.each do |coin|
-      if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
-        @player.coins += 1
-        @sounds.coin
-        coin.y += 1000
-      end
+      next unless coin.contains?(@player.square.x1,
+                                 @player.square.y1) || coin.contains?(@player.square.x2,
+                                                                      @player.square.y2) || coin.contains?(@player.square.x3,
+                                                                                                           @player.square.y3) || coin.contains?(
+                                                                                                             @player.square.x4, @player.square.y4
+                                                                                                           )
+
+      @player.coins += 1
+      @sounds.coin
+      coin.y += 1000
     end
   elsif @stage_three == true
     @level_three.coins.each do |coin|
-      if coin.contains?(@player.square.x1, @player.square.y1) || coin.contains?(@player.square.x2, @player.square.y2) || coin.contains?(@player.square.x3, @player.square.y3) || coin.contains?(@player.square.x4, @player.square.y4)
-        @player.coins += 1
-        @sounds.coin
-        coin.y += 1000
-      end
+      next unless coin.contains?(@player.square.x1,
+                                 @player.square.y1) || coin.contains?(@player.square.x2,
+                                                                      @player.square.y2) || coin.contains?(@player.square.x3,
+                                                                                                           @player.square.y3) || coin.contains?(
+                                                                                                             @player.square.x4, @player.square.y4
+                                                                                                           )
+
+      @player.coins += 1
+      @sounds.coin
+      coin.y += 1000
     end
   end
 end
@@ -119,39 +133,64 @@ end
 def enemy_collison
   if @stage_one == true
     @level_one.enemies.each do |enemy|
-      if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
-        @player.lose_life
-        @sounds.death
-      end
+      next unless enemy.contains?(@player.square.x1,
+                                  @player.square.y1) || enemy.contains?(@player.square.x2,
+                                                                        @player.square.y2) || enemy.contains?(@player.square.x3,
+                                                                                                              @player.square.y3) || enemy.contains?(
+                                                                                                                @player.square.x4, @player.square.y4
+                                                                                                              )
+
+      @player.lose_life
+      @sounds.death
     end
   elsif @stage_three == true
     @level_three.enemies.each do |enemy|
-      if enemy.contains?(@player.square.x1, @player.square.y1) || enemy.contains?(@player.square.x2, @player.square.y2) || enemy.contains?(@player.square.x3, @player.square.y3) || enemy.contains?(@player.square.x4, @player.square.y4)
-        @player.lose_life
-        @sounds.death
-      end
+      next unless enemy.contains?(@player.square.x1,
+                                  @player.square.y1) || enemy.contains?(@player.square.x2,
+                                                                        @player.square.y2) || enemy.contains?(@player.square.x3,
+                                                                                                              @player.square.y3) || enemy.contains?(
+                                                                                                                @player.square.x4, @player.square.y4
+                                                                                                              )
+
+      @player.lose_life
+      @sounds.death
     end
   end
 end
 
 def has_won?
   if @stage_one == true
-    if @level_one.goal.contains?(@player.square.x1, @player.square.y1) || @level_one.goal.contains?(@player.square.x2, @player.square.y2) || @level_one.goal.contains?(@player.square.x3, @player.square.y3) || @level_one.goal.contains?(@player.square.x4, @player.square.y4)
+    if @level_one.goal.contains?(@player.square.x1,
+                                 @player.square.y1) || @level_one.goal.contains?(@player.square.x2,
+                                                                                 @player.square.y2) || @level_one.goal.contains?(@player.square.x3,
+                                                                                                                                 @player.square.y3) || @level_one.goal.contains?(
+                                                                                                                                   @player.square.x4, @player.square.y4
+                                                                                                                                 )
       @stage_one = false
       @stage_two = true
       @sounds.next_level
       @player.reset = true
     end
   elsif @stage_two == true
-    if @level_two.goal.contains?(@player.square.x1, @player.square.y1) || @level_two.goal.contains?(@player.square.x2, @player.square.y2) || @level_two.goal.contains?(@player.square.x3, @player.square.y3) || @level_two.goal.contains?(@player.square.x4, @player.square.y4)
+    if @level_two.goal.contains?(@player.square.x1,
+                                 @player.square.y1) || @level_two.goal.contains?(@player.square.x2,
+                                                                                 @player.square.y2) || @level_two.goal.contains?(@player.square.x3,
+                                                                                                                                 @player.square.y3) || @level_two.goal.contains?(
+                                                                                                                                   @player.square.x4, @player.square.y4
+                                                                                                                                 )
       @stage_two = false
       @stage_three = true
       @sounds.next_level
       @player.reset = true
     end
-  elsif @player.lives > 0 && @stage_three == true && @level_three.goal.contains?(@player.square.x1, @player.square.y1) || @level_three.goal.contains?(@player.square.x2, @player.square.y2) || @level_three.goal.contains?(@player.square.x3, @player.square.y3) || @level_three.goal.contains?(@player.square.x4, @player.square.y4)
-      @stage_three = false
-      @winning_screen = true
+  elsif @player.lives > 0 && @stage_three == true && @level_three.goal.contains?(@player.square.x1,
+                                                                                 @player.square.y1) || @level_three.goal.contains?(@player.square.x2,
+                                                                                                                                   @player.square.y2) || @level_three.goal.contains?(@player.square.x3,
+                                                                                                                                                                                     @player.square.y3) || @level_three.goal.contains?(
+                                                                                                                                                                                       @player.square.x4, @player.square.y4
+                                                                                                                                                                                     )
+    @stage_three = false
+    @winning_screen = true
   end
 end
 
@@ -186,7 +225,7 @@ update do
     @level_one.check_enemy_0_boundary
     @level_one.portal.play(flip: :horizontal)
     @level_one.coin_animation
-  elsif @player.lives > 0 && @stage_two == true 
+  elsif @player.lives > 0 && @stage_two == true
     level_methods(@level_two)
     @level_two.portal.play(flip: :horizontal)
     @level_two.coin_animation
@@ -208,11 +247,18 @@ update do
       @game_over_sound = true
     end
     background = Image.new('./assets/bg.png', z: 8)
-    background = Image.new('./assets/gameover.png', z: 9, x: 150, y: 200) 
-    endgame_text = Text.new('Coins Collected', z: 9, color: 'red', size: 25, x: 360, y: 500 ) 
-    total_coins = Text.new(@player.coins, z: 9, color: 'red', size: 40, x: 438, y: 540) 
-    endgame_text = Text.new('Hit Enter to try again...', z: 9, color: 'red', size: 20, x:350, y: 600 )
+    background = Image.new('./assets/gameover.png', z: 9, x: 150, y: 200)
+    endgame_text = Text.new('Coins Collected', z: 9, color: 'red', size: 25, x: 360, y: 500)
+    total_coins = Text.new(@player.coins, z: 9, color: 'red', size: 40, x: 438, y: 540)
+    endgame_text = Text.new('Hit Enter to try again...', z: 9, color: 'red', size: 20, x: 350, y: 600)
   end
 end
 
-show
+# show
+
+class SuperRubyBros
+  include Ruby2D::DSL
+  def run
+    show
+  end
+end

@@ -5,6 +5,7 @@ GEM
     ruby2d (0.9.5)
 
 PLATFORMS
+  x86_64-darwin-18
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -12,4 +13,4 @@ DEPENDENCIES
   ruby2d
 
 BUNDLED WITH
-   2.2.10
+   2.2.15

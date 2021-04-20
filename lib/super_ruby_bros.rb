@@ -213,21 +213,32 @@ class SuperRubyBros
 
     update do
       clear
+      # TODO: test by asserting all the sprites positions
       @player.draw
+      # TODO: how do we test?
       platform_collision
       coin_collision
       enemy_collison
+      # TODO: test by asserting background
       background = Image.new('./assets/bg.png', z: 3)
+      # TODO: test by asserting x and y on hero sprite
       @player.hero.x = @player.x
       @player.hero.y = @player.y
       @player.hero.add
+      # TODO: how do we test?
       has_won?
+      # TODO: test by asserting x and y on hero sprite
       @player.gravity
+      # TODO: how do we test?
       player_methods
       if @player.lives > 0 && @stage_one == true
+        # TODO: test by asserting things on the screen
         level_methods(@level_one)
+        # TODO: test by asserting things on the screen
         @level_one.check_enemy_0_boundary
+        # TODO: how do we test?
         @level_one.portal.play(flip: :horizontal)
+        # TODO: how do we test?
         @level_one.coin_animation
       elsif @player.lives > 0 && @stage_two == true
         level_methods(@level_two)

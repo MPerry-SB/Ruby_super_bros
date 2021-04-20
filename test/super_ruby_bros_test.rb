@@ -66,6 +66,29 @@ class SuperRubyBrosTest < Minitest::Test
     end
   end
 
+  def test_game_looks_correct_on_launch
+    skip
+    with_fake_window do |window|
+      SuperRubyBros.new.run
+
+      contents = %(
+C
+L
+
+
+O
+------
+
+          -------
+      )
+
+      assert_window_looks_like contents, window.objects
+    end
+  end
+
+  def assert_window_looks_like contents, objects
+  end
+
   def with_fake_window
     window = FakeWindow.new
 

@@ -7,21 +7,16 @@ class AsciiScreen
   end
 
   def to_a
-    if @ascii_art.length == 1
-      [
-        OpenStruct.new(path: './assets/wood.png', x: 0, y: 0),
-      ]
-    elsif @ascii_art.length == 2
-      [
-        OpenStruct.new(path: './assets/wood.png', x: 0, y: 0),
-        OpenStruct.new(path: './assets/wood.png', x: 1, y: 0),
-      ]
-    else
-      [
-        OpenStruct.new(path: './assets/wood.png', x: 0, y: 0),
-        OpenStruct.new(path: './assets/wood.png', x: 0, y: 1),
-      ]
-    end
+    @ascii_art
+      .split("\n")
+      .each_with_index
+      .flat_map do |row, row_index|
+        row
+          .chars
+          .each_with_index.map do |_, column_index|
+            OpenStruct.new(path: './assets/wood.png', x: column_index, y: row_index)
+          end
+      end
   end
 end
 

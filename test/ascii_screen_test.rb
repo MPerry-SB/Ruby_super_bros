@@ -20,8 +20,9 @@ class AsciiScreen
       .flat_map do |row, row_index|
         row
           .chars
-          .each_with_index.map do |_, column_index|
-            OpenStruct.new(path: './assets/wood.png', x: column_index * @pixel_width, y: row_index * @pixel_height)
+          .each_with_index.map do |cell, column_index|
+            name = cell == '-' ? 'wood' : 'hero'
+            OpenStruct.new(path: "./assets/#{name}.png", x: column_index * @pixel_width, y: row_index * @pixel_height)
           end
       end
   end
@@ -59,6 +60,14 @@ class AsciiScreenTest < Minitest::Test
     expected_objects = [
       OpenStruct.new(path: './assets/wood.png', x: 0, y: 0),
       OpenStruct.new(path: './assets/wood.png', x: 0, y: 2)
+    ]
+    assert_equal expected_objects, objects
+  end
+
+  def test_hero_sprite
+    objects = AsciiScreen.new("h", width: 1, height: 1).to_a
+    expected_objects = [
+      OpenStruct.new(path: './assets/hero.png', x: 0, y: 0),
     ]
     assert_equal expected_objects, objects
   end

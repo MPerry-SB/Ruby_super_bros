@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'ostruct'
 
 class AsciiScreen
-  def initialize ascii_art, width:, height:
+  def initialize(ascii_art, width:, height:)
     @ascii_art = ascii_art
     @width = width
     @height = height
@@ -65,9 +65,9 @@ class AsciiScreenTest < Minitest::Test
   end
 
   def test_hero_sprite
-    objects = AsciiScreen.new("h", width: 1, height: 1).to_a
+    objects = AsciiScreen.new('h', width: 1, height: 1).to_a
     expected_objects = [
-      OpenStruct.new(path: './assets/hero.png', x: 0, y: 0),
+      OpenStruct.new(path: './assets/hero.png', x: 0, y: 0)
     ]
     assert_equal expected_objects, objects
   end
